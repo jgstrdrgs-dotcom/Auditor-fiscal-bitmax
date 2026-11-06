@@ -12,7 +12,7 @@ Unicode true
 
 !define APP_NAME "Auditor Fiscal BITMAX"
 !define APP_EXE "AuditorFiscalBitmax.exe"
-!define APP_VERSION "2.6.16"
+!define APP_VERSION "2.6.17"
 !define APP_UNINSTALL_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\AuditorFiscalBitmax"
 !define APP_SETTINGS_KEY "Software\BITMAX\AuditorFiscalBitmax"
 
@@ -25,8 +25,8 @@ SetCompressor /SOLID lzma
 ShowInstDetails show
 ShowUninstDetails show
 
-VIProductVersion "2.6.16.0"
-VIAddVersionKey "FileVersion" "2.6.16.0"
+VIProductVersion "2.6.17.0"
+VIAddVersionKey "FileVersion" "2.6.17.0"
 VIAddVersionKey "ProductName" "${APP_NAME}"
 VIAddVersionKey "ProductVersion" "${APP_VERSION}"
 VIAddVersionKey "FileDescription" "Instalador do ${APP_NAME}"

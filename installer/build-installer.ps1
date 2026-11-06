@@ -10,7 +10,7 @@ $repoRoot = Split-Path -Parent $installerDir
 $appPath = (Resolve-Path -LiteralPath $AppExe).Path
 $scriptPath = Join-Path $installerDir 'auditor-fiscal-bitmax.nsi'
 $outputDir = Join-Path $repoRoot 'artifacts'
-$outputPath = Join-Path $outputDir 'Auditor Fiscal BITMAX Setup 2.6.16.exe'
+$outputPath = Join-Path $outputDir 'Auditor Fiscal BITMAX Setup 2.6.17.exe'
 
 if (-not $Makensis) {
     $candidate = Get-Command 'makensis.exe' -ErrorAction SilentlyContinue
