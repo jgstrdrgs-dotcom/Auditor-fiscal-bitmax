@@ -6,7 +6,7 @@ Aplicativo Windows para auditoria assistida de arquivos EFD ICMS/IPI e EFD-Contr
 
 Baixe o instalador na página [Releases](https://github.com/jgstrdrgs-dotcom/Auditor-fiscal-bitmax/releases). A versão atual é **2.6.17**.
 
-O setup instala o aplicativo e cria atalhos no Menu Iniciar. Ele pode ser instalado por usuário, sem permissões de administrador. A desinstalação remove os arquivos do aplicativo e preserva os dados do usuário fora da pasta de instalação.
+O setup instala sempre em `C:\Bitmax`, criando essa pasta se necessário, e cria atalhos no Menu Iniciar para todos os usuários. O Windows solicitará permissão de administrador para gravar na raiz de `C:`. A desinstalação remove os arquivos instalados e preserva dados que estejam fora da pasta do aplicativo.
 
 Requisito: Windows 64 bits. O instalador verifica a arquitetura antes de continuar.
 

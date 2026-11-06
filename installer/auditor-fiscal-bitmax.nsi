@@ -18,9 +18,8 @@ Unicode true
 
 Name "${APP_NAME} ${APP_VERSION}"
 OutFile "${SETUP_OUTPUT}"
-InstallDir "$LOCALAPPDATA\Programs\Auditor Fiscal BITMAX"
-InstallDirRegKey HKCU "${APP_SETTINGS_KEY}" "InstallDir"
-RequestExecutionLevel user
+InstallDir "C:\Bitmax"
+RequestExecutionLevel admin
 SetCompressor /SOLID lzma
 ShowInstDetails show
 ShowUninstDetails show
@@ -34,6 +33,7 @@ VIAddVersionKey "CompanyName" "BITMAX"
 VIAddVersionKey "LegalCopyright" "BITMAX"
 
 !define MUI_ABORTWARNING
+!define MUI_WELCOMEPAGE_TEXT "Este assistente instalará o Auditor Fiscal BITMAX em C:\Bitmax. A pasta será criada automaticamente, se necessário. O Windows pedirá permissão de administrador para concluir a instalação."
 !define MUI_ICON "bitmax_circulo.ico"
 !define MUI_UNICON "bitmax_circulo.ico"
 !define MUI_FINISHPAGE_RUN "$INSTDIR\${APP_EXE}"
@@ -42,7 +42,6 @@ VIAddVersionKey "LegalCopyright" "BITMAX"
 !define MUI_FINISHPAGE_SHOWREADME_TEXT "Ver os requisitos e os links oficiais do PVA/PGE"
 
 !insertmacro MUI_PAGE_WELCOME
-!insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
 !insertmacro MUI_PAGE_FINISH
 !insertmacro MUI_LANGUAGE "PortugueseBR"
@@ -56,7 +55,9 @@ FunctionEnd
 
 Section "Aplicativo" SEC_APP
   SectionIn RO
-  SetShellVarContext current
+  SetRegView 64
+  SetShellVarContext all
+  CreateDirectory "$INSTDIR"
   SetOutPath "$INSTDIR"
   File /oname=${APP_EXE} "${APP_BINARY}"
   File "REQUISITOS-PVA-PGE.html"
@@ -66,24 +67,25 @@ Section "Aplicativo" SEC_APP
   CreateShortcut "$SMPROGRAMS\${APP_NAME}\Requisitos do PVA-PGE.lnk" "$INSTDIR\REQUISITOS-PVA-PGE.html"
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 
-  WriteRegStr HKCU "${APP_SETTINGS_KEY}" "InstallDir" "$INSTDIR"
-  WriteRegStr HKCU "${APP_UNINSTALL_KEY}" "DisplayName" "${APP_NAME} ${APP_VERSION}"
-  WriteRegStr HKCU "${APP_UNINSTALL_KEY}" "DisplayVersion" "${APP_VERSION}"
-  WriteRegStr HKCU "${APP_UNINSTALL_KEY}" "Publisher" "BITMAX"
-  WriteRegStr HKCU "${APP_UNINSTALL_KEY}" "InstallLocation" "$INSTDIR"
-  WriteRegStr HKCU "${APP_UNINSTALL_KEY}" "DisplayIcon" "$INSTDIR\${APP_EXE}"
-  WriteRegStr HKCU "${APP_UNINSTALL_KEY}" "UninstallString" '"$INSTDIR\Uninstall.exe"'
-  WriteRegDWORD HKCU "${APP_UNINSTALL_KEY}" "NoModify" 1
-  WriteRegDWORD HKCU "${APP_UNINSTALL_KEY}" "NoRepair" 1
+  WriteRegStr HKLM "${APP_SETTINGS_KEY}" "InstallDir" "$INSTDIR"
+  WriteRegStr HKLM "${APP_UNINSTALL_KEY}" "DisplayName" "${APP_NAME} ${APP_VERSION}"
+  WriteRegStr HKLM "${APP_UNINSTALL_KEY}" "DisplayVersion" "${APP_VERSION}"
+  WriteRegStr HKLM "${APP_UNINSTALL_KEY}" "Publisher" "BITMAX"
+  WriteRegStr HKLM "${APP_UNINSTALL_KEY}" "InstallLocation" "$INSTDIR"
+  WriteRegStr HKLM "${APP_UNINSTALL_KEY}" "DisplayIcon" "$INSTDIR\${APP_EXE}"
+  WriteRegStr HKLM "${APP_UNINSTALL_KEY}" "UninstallString" '"$INSTDIR\Uninstall.exe"'
+  WriteRegDWORD HKLM "${APP_UNINSTALL_KEY}" "NoModify" 1
+  WriteRegDWORD HKLM "${APP_UNINSTALL_KEY}" "NoRepair" 1
 SectionEnd
 
 Section /o "Criar atalho na Área de Trabalho" SEC_DESKTOP
-  SetShellVarContext current
+  SetShellVarContext all
   CreateShortcut "$DESKTOP\${APP_NAME}.lnk" "$INSTDIR\${APP_EXE}"
 SectionEnd
 
 Section "Uninstall"
-  SetShellVarContext current
+  SetRegView 64
+  SetShellVarContext all
   Delete "$DESKTOP\${APP_NAME}.lnk"
   Delete "$SMPROGRAMS\${APP_NAME}\${APP_NAME}.lnk"
   Delete "$SMPROGRAMS\${APP_NAME}\Requisitos do PVA-PGE.lnk"
@@ -94,6 +96,6 @@ Section "Uninstall"
   Delete "$INSTDIR\Uninstall.exe"
   RMDir "$INSTDIR"
 
-  DeleteRegKey HKCU "${APP_UNINSTALL_KEY}"
-  DeleteRegKey HKCU "${APP_SETTINGS_KEY}"
+  DeleteRegKey HKLM "${APP_UNINSTALL_KEY}"
+  DeleteRegKey HKLM "${APP_SETTINGS_KEY}"
 SectionEnd
