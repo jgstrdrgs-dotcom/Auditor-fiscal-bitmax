@@ -1,0 +1,4 @@
+/artifacts/
+/installer/payload/
+*.log
+*.tmp
