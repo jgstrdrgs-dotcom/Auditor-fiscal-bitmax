@@ -8,6 +8,8 @@ Baixe o instalador na página [Releases](https://github.com/jgstrdrgs-dotcom/Aud
 
 O setup instala o aplicativo e cria atalhos no Menu Iniciar. Ele pode ser instalado por usuário, sem permissões de administrador. A desinstalação remove os arquivos do aplicativo e preserva os dados do usuário fora da pasta de instalação.
 
+Requisito: Windows 64 bits. O instalador verifica a arquitetura antes de continuar.
+
 ## Validação oficial
 
 O Auditor pode ser iniciado sem instalar Python ou Java separadamente. A validação oficial depende do PVA/PGE da Receita Federal instalado à parte; esses programas não são redistribuídos pelo instalador do BITMAX. Consulte `installer/REQUISITOS-PVA-PGE.html` para acessar as páginas oficiais e configurar o validador no aplicativo.

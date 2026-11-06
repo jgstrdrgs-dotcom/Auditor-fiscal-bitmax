@@ -1,6 +1,7 @@
 Unicode true
 
 !include "MUI2.nsh"
+!include "x64.nsh"
 
 !ifndef APP_BINARY
   !error "Informe o caminho do executável compilado com /DAPP_BINARY=..."
@@ -45,6 +46,13 @@ VIAddVersionKey "LegalCopyright" "BITMAX"
 !insertmacro MUI_PAGE_INSTFILES
 !insertmacro MUI_PAGE_FINISH
 !insertmacro MUI_LANGUAGE "PortugueseBR"
+
+Function .onInit
+  ${IfNot} ${RunningX64}
+    MessageBox MB_ICONSTOP|MB_OK "Esta versão do Auditor Fiscal BITMAX requer Windows 64 bits."
+    Abort
+  ${EndIf}
+FunctionEnd
 
 Section "Aplicativo" SEC_APP
   SectionIn RO
